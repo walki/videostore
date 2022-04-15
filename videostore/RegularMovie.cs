@@ -16,5 +16,10 @@
 
 			return detailAmount;
 		}
+
+		public override int GetPoints(int daysRented)
+		{
+			return 1;
+		}
 	}
 }

@@ -38,21 +38,12 @@ namespace videostore
 
 		public virtual double GetAmount(int daysRented)
 		{
-			double detailAmount = 0;
-
-			return detailAmount;
+			return -1;
 		}
 
-		public int GetPoints(int daysRented)
+		public virtual int GetPoints(int daysRented)
 		{
-			int points = 0;
-			points++;
-
-			if (getPriceCode() == Movie.NEW_RELEASE
-					&& daysRented > 1)
-				points++;
-
-			return points;
+			return -1;
 		}
 	}
 }
