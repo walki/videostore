@@ -10,7 +10,7 @@ namespace videostore
     [TestFixture]
     public class VideoStoreTest
     {
-        private Customer customer;
+        private Statement customer;
         private Movie NewRelease1;
         private Movie NewRelease2;
         private Movie Childrens1;
@@ -21,7 +21,7 @@ namespace videostore
         [SetUp]
         protected void SetUp()
         {
-            customer = new Customer("Customer Name");
+            customer = new Statement("Customer Name");
             NewRelease1 = new Movie("New Release 1", Movie.NEW_RELEASE);
             NewRelease2 = new Movie("New Release 2", Movie.NEW_RELEASE);
             Childrens1 = new Movie("Childrens 1", Movie.CHILDRENS);
@@ -76,8 +76,8 @@ namespace videostore
 
         private void AssertAmountOwedAndRenterPoints(double owed, int points)
         {
-            Assert.That(customer.GetAmount(), Is.EqualTo(owed).Within(0.000001));
-            Assert.That(customer.GetPoints(), Is.EqualTo(points));
+            Assert.That(customer.GetStatementAmount(), Is.EqualTo(owed).Within(0.000001));
+            Assert.That(customer.GetStatementPoints(), Is.EqualTo(points));
         }
 
     }
