@@ -39,23 +39,6 @@ namespace videostore
 		public virtual double GetAmount(int daysRented)
 		{
 			double detailAmount = 0;
-			// determines the amount for each line
-			switch (getPriceCode())
-			{
-				case Movie.REGULAR:
-					detailAmount += 2;
-					if (daysRented > 2)
-						detailAmount += (daysRented - 2) * 1.5;
-					break;
-				case Movie.NEW_RELEASE:
-					detailAmount += daysRented * 3;
-					break;
-				case Movie.CHILDRENS:
-					detailAmount += 1.5;
-					if (daysRented > 3)
-						detailAmount += (daysRented - 3) * 1.5;
-					break;
-			}
 
 			return detailAmount;
 		}
