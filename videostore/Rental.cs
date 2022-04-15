@@ -29,7 +29,7 @@ namespace videostore
 
         public string getTitle()
         {
-            return movie.getTitle();
+            return movie.GetTitle();
         }
     }
 }

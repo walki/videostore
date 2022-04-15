@@ -6,44 +6,22 @@ using System.Threading.Tasks;
 
 namespace videostore
 {
-	public class Movie
+	public abstract class Movie
 	{
-		public const int CHILDRENS = 2;
-		public const int REGULAR = 0;
-		public const int NEW_RELEASE = 1;
-
 		private String title;
-		private int priceCode;
 
-		public Movie(String title, int priceCode)
-		{
+		public Movie(String title)
+        {
 			this.title = title;
-			this.priceCode = priceCode;
 		}
 
-		public int getPriceCode()
-		{
-			return priceCode;
-		}
-
-		public void setPriceCode(int code)
-		{
-			priceCode = code;
-		}
-
-		public String getTitle()
+		public String GetTitle()
 		{
 			return title;
 		}
 
-		public virtual double GetAmount(int daysRented)
-		{
-			return -1;
-		}
+		public abstract double GetAmount(int daysRented);
 
-		public virtual int GetPoints(int daysRented)
-		{
-			return -1;
-		}
+		public abstract int GetPoints(int daysRented);
 	}
 }

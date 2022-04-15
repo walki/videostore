@@ -22,12 +22,12 @@ namespace videostore
         protected void SetUp()
         {
             customer = new Statement("Customer Name");
-            NewRelease1 = new NewReleaseMovie("New Release 1", Movie.NEW_RELEASE);
-            NewRelease2 = new NewReleaseMovie("New Release 2", Movie.NEW_RELEASE);
-            Childrens1 = new ChildrensMovie("Childrens 1", Movie.CHILDRENS);
-            Regular1 = new RegularMovie("Regular 1", Movie.REGULAR);
-            Regular2 = new RegularMovie("Regular 2", Movie.REGULAR);
-            Regular3 = new RegularMovie("Regular 3", Movie.REGULAR);
+            NewRelease1 = new NewReleaseMovie("New Release 1");
+            NewRelease2 = new NewReleaseMovie("New Release 2");
+            Childrens1 = new ChildrensMovie("Childrens 1");
+            Regular1 = new RegularMovie("Regular 1");
+            Regular2 = new RegularMovie("Regular 2");
+            Regular3 = new RegularMovie("Regular 3");
         }
 
         [Test]
