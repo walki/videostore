@@ -18,67 +18,79 @@ namespace videostore
 			this.name = name;
 		}
 
-		public void addRental(Rental rental)
+		public void AddRental(Rental rental)
 		{
 			rentals.Add(rental);
 		}
 
-		public String getName()
+		public String GetName()
 		{
 			return name;
 		}
 
-		public String statement()
+		public String GenerateFormattedStatement()
+
 		{
-			String result = "Rental Record for " + getName() + "\n";
+			String result = "Rental Record for " + GetName() + "\n";
 
-			foreach (Rental each in rentals)
-			{
-				double thisAmount = 0;
+			foreach (Rental rental in rentals)
+            {
+                double detailAmount = determineDetailAmount(rental);
 
-				// determines the amount for each line
-				switch (each.getMovie().getPriceCode())
-				{
-					case Movie.REGULAR:
-						thisAmount += 2;
-						if (each.getDaysRented() > 2)
-							thisAmount += (each.getDaysRented() - 2) * 1.5;
-						break;
-					case Movie.NEW_RELEASE:
-						thisAmount += each.getDaysRented() * 3;
-						break;
-					case Movie.CHILDRENS:
-						thisAmount += 1.5;
-						if (each.getDaysRented() > 3)
-							thisAmount += (each.getDaysRented() - 3) * 1.5;
-						break;
-				}
+                determineRentalPoints(rental);
 
-				frequentRenterPoints++;
+                result += "\t" + rental.getMovie().getTitle() + "\t"
+                                    + String.Format("{0:0.00}", detailAmount) + "\n";
+                totalAmount += detailAmount;
 
-				if (each.getMovie().getPriceCode() == Movie.NEW_RELEASE
-						&& each.getDaysRented() > 1)
-					frequentRenterPoints++;
+            }
 
-				result += "\t" + each.getMovie().getTitle() + "\t"
-									+ String.Format("{0:0.00}", thisAmount) + "\n";
-				totalAmount += thisAmount;
-
-			}
-
-			result += "You owed " + String.Format("{0:0.00}", totalAmount) + "\n";
+            result += "You owed " + String.Format("{0:0.00}", totalAmount) + "\n";
 			result += "You earned " + frequentRenterPoints + " frequent renter points\n";
 
 
 			return result;
 		}
 
-        internal int getPoints()
+        private void determineRentalPoints(Rental rental)
+        {
+            frequentRenterPoints++;
+
+            if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE
+                    && rental.getDaysRented() > 1)
+                frequentRenterPoints++;
+        }
+
+        private static double determineDetailAmount(Rental each)
+        {
+            double detailAmount = 0;
+            // determines the amount for each line
+            switch (each.getMovie().getPriceCode())
+            {
+                case Movie.REGULAR:
+                    detailAmount += 2;
+                    if (each.getDaysRented() > 2)
+                        detailAmount += (each.getDaysRented() - 2) * 1.5;
+                    break;
+                case Movie.NEW_RELEASE:
+                    detailAmount += each.getDaysRented() * 3;
+                    break;
+                case Movie.CHILDRENS:
+                    detailAmount += 1.5;
+                    if (each.getDaysRented() > 3)
+                        detailAmount += (each.getDaysRented() - 3) * 1.5;
+                    break;
+            }
+
+            return detailAmount;
+        }
+
+        internal int GetPoints()
         {
 			return frequentRenterPoints;
         }
 
-        internal double getAmount()
+        internal double GetAmount()
         {
             return totalAmount;
         }
