@@ -8,12 +8,12 @@ namespace videostore
 {
     public class Statement
     {
-        private String name;
+        private String customerName;
         private List<Rental> rentals = new List<Rental>();
 
-        public Statement(String name)
+        public Statement(String customerName)
         {
-            this.name = name;
+            this.customerName = customerName;
         }
 
         public void AddRental(Rental rental)
@@ -21,9 +21,9 @@ namespace videostore
             rentals.Add(rental);
         }
 
-        public String GetName()
+        public String GetCustomerName()
         {
-            return name;
+            return customerName;
         }
 
         public String GenerateFormattedStatement()
@@ -36,7 +36,7 @@ namespace videostore
 
         private string GenerateHeader()
         {
-            return "Rental Record for " + GetName() + "\n";
+            return "Rental Record for " + GetCustomerName() + "\n";
         }
 
         private string GenerateDetails()
