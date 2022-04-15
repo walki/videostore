@@ -8,7 +8,12 @@ namespace videostore
 {
     public class Customer
     {
-		public Customer(String name)
+        private String name;
+		private List<Rental> rentals = new List<Rental>();
+        private double totalAmount;
+        private int frequentRenterPoints;
+
+        public Customer(String name)
 		{
 			this.name = name;
 		}
@@ -25,9 +30,6 @@ namespace videostore
 
 		public String statement()
 		{
-			double totalAmount = 0;
-			int frequentRenterPoints = 0;
-
 			String result = "Rental Record for " + getName() + "\n";
 
 			foreach (Rental each in rentals)
@@ -71,14 +73,15 @@ namespace videostore
 			return result;
 		}
 
-        internal double getAmount()
+        internal int getPoints()
         {
-            return 9.0;
+			return frequentRenterPoints;
         }
 
-        private String name;
-		private List<Rental> rentals = new List<Rental>();
+        internal double getAmount()
+        {
+            return totalAmount;
+        }
 
-
-	}
+    }
 }

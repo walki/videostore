@@ -32,7 +32,8 @@ namespace videostore
                                                         "\tThe Cell\t9.00\n" +
                                                         "You owed 9.00\n" +
                                                         "You earned 2 frequent renter points\n"));
-            Assert.That(customer.getAmount(), Is.EqualTo(9.00).Within(0.000001));
+            
+            AssertAmountOwedAndRenterPoints(9.00, 2);
         }
 
         [Test]
@@ -45,6 +46,8 @@ namespace videostore
                                                         "\tThe Tigger Movie\t9.00\n" +
                                                         "You owed 18.00\n" +
                                                         "You earned 4 frequent renter points\n"));
+            
+            AssertAmountOwedAndRenterPoints(18.00, 4);
         }
 
         [Test]
@@ -54,6 +57,8 @@ namespace videostore
             Assert.That(customer.statement(), Is.EqualTo("Rental Record for Fred\n" +
                                                         "\tThe Tigger Movie\t1.50\n" +
                                                         "You owed 1.50\nYou earned 1 frequent renter points\n"));
+
+            AssertAmountOwedAndRenterPoints(1.50, 1);
         }
 
         [Test]
@@ -69,6 +74,13 @@ namespace videostore
                                                         "\tEraserhead\t3.50\n" +
                                                         "You owed 7.50\n" +
                                                         "You earned 3 frequent renter points\n"));
+            AssertAmountOwedAndRenterPoints(7.50, 3);
+        }
+
+        private void AssertAmountOwedAndRenterPoints(double owed, int points)
+        {
+            Assert.That(customer.getAmount(), Is.EqualTo(owed).Within(0.000001));
+            Assert.That(customer.getPoints(), Is.EqualTo(points));
         }
 
     }
