@@ -34,7 +34,6 @@ namespace videostore
         public void SingleNewReleaseStatement()
         {
             customer.AddRental(new Rental(NewRelease1, 3));
-            customer.GenerateFormattedStatement();
             
             AssertAmountOwedAndRenterPoints(9.00, 2);
         }
@@ -44,7 +43,6 @@ namespace videostore
         {
             customer.AddRental(new Rental(NewRelease1, 3));
             customer.AddRental(new Rental(NewRelease2, 3));
-            customer.GenerateFormattedStatement();
 
             AssertAmountOwedAndRenterPoints(18.00, 4);
         }
@@ -53,8 +51,7 @@ namespace videostore
         public void SingleChildrensStatement()
         {
             customer.AddRental(new Rental(Childrens1, 3));
-            customer.GenerateFormattedStatement();
-
+            
             AssertAmountOwedAndRenterPoints(1.50, 1);
         }
 
