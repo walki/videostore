@@ -36,7 +36,7 @@ namespace videostore
 			return title;
 		}
 
-		public double GetAmount(int daysRented)
+		public virtual double GetAmount(int daysRented)
 		{
 			double detailAmount = 0;
 			// determines the amount for each line
