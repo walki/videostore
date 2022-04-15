@@ -29,19 +29,17 @@ namespace videostore
 		}
 
 		public String GenerateFormattedStatement()
-
 		{
 			String result = "Rental Record for " + GetName() + "\n";
 
 			foreach (Rental rental in rentals)
             {
-                double rentalAmount = rental.GetAmount();
 
-                DetermineRentalPoints(rental);
+                frequentRenterPoints += rental.GetPoints();
 
-                result += "\t" + rental.getMovie().getTitle() + "\t"
-                                    + String.Format("{0:0.00}", rentalAmount) + "\n";
-                totalAmount += rentalAmount;
+                result += "\t" + rental.getTitle() + "\t"
+                                    + String.Format("{0:0.00}", rental.GetAmount()) + "\n";
+                totalAmount += rental.GetAmount();
 
             }
 
@@ -52,14 +50,7 @@ namespace videostore
 			return result;
 		}
 
-        private void DetermineRentalPoints(Rental rental)
-        {
-            frequentRenterPoints++;
-
-            if (rental.getMovie().getPriceCode() == Movie.NEW_RELEASE
-                    && rental.getDaysRented() > 1)
-                frequentRenterPoints++;
-        }
+ 
 
 
 

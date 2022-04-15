@@ -32,7 +32,7 @@ namespace videostore
 			return movie.getPriceCode();
         }
 
-        public  double GetAmount()
+        public double GetAmount()
         {
             double detailAmount = 0;
             // determines the amount for each line
@@ -54,6 +54,23 @@ namespace videostore
             }
 
             return detailAmount;
+        }
+
+        public int GetPoints()
+        {
+            int points = 0;
+            points++;
+
+            if (getPriceCode() == Movie.NEW_RELEASE
+                    && getDaysRented() > 1)
+                points++;
+
+            return points;
+        }
+
+        public string getTitle()
+        {
+            return movie.getTitle();
         }
     }
 }
