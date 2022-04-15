@@ -35,13 +35,13 @@ namespace videostore
 
 			foreach (Rental rental in rentals)
             {
-                double detailAmount = determineDetailAmount(rental);
+                double rentalAmount = rental.GetAmount();
 
-                determineRentalPoints(rental);
+                DetermineRentalPoints(rental);
 
                 result += "\t" + rental.getMovie().getTitle() + "\t"
-                                    + String.Format("{0:0.00}", detailAmount) + "\n";
-                totalAmount += detailAmount;
+                                    + String.Format("{0:0.00}", rentalAmount) + "\n";
+                totalAmount += rentalAmount;
 
             }
 
@@ -52,7 +52,7 @@ namespace videostore
 			return result;
 		}
 
-        private void determineRentalPoints(Rental rental)
+        private void DetermineRentalPoints(Rental rental)
         {
             frequentRenterPoints++;
 
@@ -61,29 +61,7 @@ namespace videostore
                 frequentRenterPoints++;
         }
 
-        private static double determineDetailAmount(Rental each)
-        {
-            double detailAmount = 0;
-            // determines the amount for each line
-            switch (each.getMovie().getPriceCode())
-            {
-                case Movie.REGULAR:
-                    detailAmount += 2;
-                    if (each.getDaysRented() > 2)
-                        detailAmount += (each.getDaysRented() - 2) * 1.5;
-                    break;
-                case Movie.NEW_RELEASE:
-                    detailAmount += each.getDaysRented() * 3;
-                    break;
-                case Movie.CHILDRENS:
-                    detailAmount += 1.5;
-                    if (each.getDaysRented() > 3)
-                        detailAmount += (each.getDaysRented() - 3) * 1.5;
-                    break;
-            }
 
-            return detailAmount;
-        }
 
         internal int GetPoints()
         {
