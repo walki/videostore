@@ -11,6 +11,12 @@ namespace videostore
     public class VideoStoreTest
     {
         private Customer customer;
+        private Movie NewRelease1 = new Movie("The Cell", Movie.NEW_RELEASE);
+        private Movie NewRelease2 = new Movie("The Tigger Movie", Movie.NEW_RELEASE);
+        private Movie Childrens1 = new Movie("The Tigger Movie", Movie.CHILDRENS);
+        private Movie Regular1 = new Movie("Plan 9 from Outer Space", Movie.REGULAR);
+        private Movie Regular2 = new Movie("8 1/2", Movie.REGULAR);
+        private Movie Regular3 = new Movie("Eraserhead", Movie.REGULAR);
 
         [SetUp]
         protected void SetUp()
@@ -21,18 +27,19 @@ namespace videostore
         [Test]
         public void SingleNewReleaseStatement()
         {
-            customer.addRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
+            customer.addRental(new Rental(NewRelease1, 3));
             Assert.That(customer.statement(), Is.EqualTo("Rental Record for Fred\n" +
                                                         "\tThe Cell\t9.00\n" +
                                                         "You owed 9.00\n" +
                                                         "You earned 2 frequent renter points\n"));
+            Assert.That(customer.getAmount(), Is.EqualTo(9.00).Within(0.000001));
         }
 
         [Test]
         public void DualNewReleaseStatement()
         {
-            customer.addRental(new Rental(new Movie("The Cell", Movie.NEW_RELEASE), 3));
-            customer.addRental(new Rental(new Movie("The Tigger Movie", Movie.NEW_RELEASE), 3));
+            customer.addRental(new Rental(NewRelease1, 3));
+            customer.addRental(new Rental(NewRelease2, 3));
             Assert.That(customer.statement(), Is.EqualTo("Rental Record for Fred\n" +
                                                         "\tThe Cell\t9.00\n" +
                                                         "\tThe Tigger Movie\t9.00\n" +
@@ -43,7 +50,7 @@ namespace videostore
         [Test]
         public void SingleChildrensStatement()
         {
-            customer.addRental(new Rental(new Movie("The Tigger Movie", Movie.CHILDRENS), 3));
+            customer.addRental(new Rental(Childrens1, 3));
             Assert.That(customer.statement(), Is.EqualTo("Rental Record for Fred\n" +
                                                         "\tThe Tigger Movie\t1.50\n" +
                                                         "You owed 1.50\nYou earned 1 frequent renter points\n"));
@@ -52,9 +59,9 @@ namespace videostore
         [Test]
         public void MultipleRegularStatement()
         {
-            customer.addRental(new Rental(new Movie("Plan 9 from Outer Space", Movie.REGULAR), 1));
-            customer.addRental(new Rental(new Movie("8 1/2", Movie.REGULAR), 2));
-            customer.addRental(new Rental(new Movie("Eraserhead", Movie.REGULAR), 3));
+            customer.addRental(new Rental(Regular1, 1));
+            customer.addRental(new Rental(Regular2, 2));
+            customer.addRental(new Rental(Regular3, 3));
 
             Assert.That(customer.statement(), Is.EqualTo("Rental Record for Fred\n" +
                                                         "\tPlan 9 from Outer Space\t2.00\n" +

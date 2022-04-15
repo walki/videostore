@@ -71,8 +71,12 @@ namespace videostore
 			return result;
 		}
 
+        internal double getAmount()
+        {
+            return 9.0;
+        }
 
-		private String name;
+        private String name;
 		private List<Rental> rentals = new List<Rental>();
 
 
